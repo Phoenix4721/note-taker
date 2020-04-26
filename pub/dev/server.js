@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const data = require('./db/db.json')
+const data = require('./database/db.json')
 
 //Set up Localhost
 var app = express();
@@ -21,8 +21,7 @@ app.get("/notes", function(req, res) {
 // put /* at bottom
   
 app.get("/api/notes", function(req, res) {
-
-    res.sendFile(path.join(__dirname, "./db/db.json"));
+    res.sendFile(path.join(__dirname, "./database/db.json"));
   });
 
   app.get("/*", function(req, res) {
@@ -42,8 +41,7 @@ app.get("/api/notes", function(req, res) {
 const updateNotes = () => {
     data.forEach(addIdz(1))
 
-
-    fs.writeFileSync('./db/db.json', JSON.stringify(data, null, 4))
+    fs.writeFileSync('./database/db.json', JSON.stringify(data, null, 4))
 
     function addIdz(id) {
       return function inc(o) {
@@ -71,7 +69,7 @@ const updateNotes = () => {
 
     data.splice(index, 1);
 
-    fs.writeFileSync('./db/db.json', JSON.stringify(data, null, 4))
+    fs.writeFileSync('./database/db.json', JSON.stringify(data, null, 4))
     res.json(data)
   });
 
